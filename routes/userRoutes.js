@@ -8,16 +8,18 @@ const JWT_SECRET = "your_jwt_secret";
 
 // Register
 router.post("/register", async (req, res) => {
-  try {
-    const { name, email, password, role } = req.body;
-    const user = new User({ name, email, password, role });
-    await user.save();
-    res.status(201).json({ message: "User registered successfully" });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
+    try {
+      const { name, email, password, role, username } = req.body; // Include username
+      const user = new User({ name, email, password, role, username });
+      await user.save();
+      res.status(201).json({ message: "User registered successfully" });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  });
+  
 
+ 
 // Login
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
